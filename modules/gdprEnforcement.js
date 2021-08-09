@@ -130,6 +130,7 @@ function getGvlidForAnalyticsAdapter(code) {
 export function validateRules(rule, consentData, currentModule, gvlId) {
   const purposeId = TCF2[Object.keys(TCF2).filter(purposeName => TCF2[purposeName].name === rule.purpose)[0]].id;
 
+  utils.logWarn(`purposeId ${purposeId}`);
   // return 'true' if vendor present in 'vendorExceptions'
   if (includes(rule.vendorExceptions || [], currentModule)) {
     return true;
@@ -137,8 +138,13 @@ export function validateRules(rule, consentData, currentModule, gvlId) {
 
   // get data from the consent string
   const purposeConsent = utils.deepAccess(consentData, `vendorData.purpose.consents.${purposeId}`);
+  utils.logWarn(`purposeConsent ${purposeConsent}`);
+
   const vendorConsent = utils.deepAccess(consentData, `vendorData.vendor.consents.${gvlId}`);
+  utils.logWarn(`vendorConsent ${vendorConsent}`);
+
   const liTransparency = utils.deepAccess(consentData, `vendorData.purpose.legitimateInterests.${purposeId}`);
+  utils.logWarn(`liTransparency ${liTransparency}`);
 
   /*
     Since vendor exceptions have already been handled, the purpose as a whole is allowed if it's not being enforced
@@ -282,7 +288,7 @@ export function makeBidRequestsHook(fn, adUnits, ...args) {
           if (includes(biddersBlocked, currBidder)) return false;
           const isAllowed = !!validateRules(purpose2Rule, consentData, currBidder, gvlId);
           if (!isAllowed) {
-            utils.logWarn(`TCF2 blocked auction for ${currBidder}`);
+            utils.logWarn(`TCF2 blocked auction for ${currBidder}, gvlId ${gvlId}`);
             biddersBlocked.push(currBidder);
           }
           return isAllowed;
