@@ -131,6 +131,12 @@ export function validateRules(rule, consentData, currentModule, gvlId) {
   const purposeId = TCF2[Object.keys(TCF2).filter(purposeName => TCF2[purposeName].name === rule.purpose)[0]].id;
 
   utils.logWarn(`purposeId ${purposeId}`);
+  utils.logWarn(`consentData ${consentData}`);
+  utils.logWarn(`rule ${rule}`);
+  utils.logWarn(`currentModule ${currentModule}`);
+  utils.logWarn(`consentData ${JSON.stringify(consentData)}`);
+  utils.logWarn(`rule ${JSON.stringify(rule)}`);
+  utils.logWarn(consentData);
   // return 'true' if vendor present in 'vendorExceptions'
   if (includes(rule.vendorExceptions || [], currentModule)) {
     return true;
