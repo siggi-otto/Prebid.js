@@ -69,7 +69,7 @@ export const spec = {
     return !!(bid.sizes && bid.bidId && bid.params &&
       (bid.params.accountId && (typeof bid.params.accountId === 'string')) &&
       (bid.params.placementId && (typeof bid.params.placementId === 'string')) &&
-      ((typeof bid.params.profile === 'undefined') || (typeof bid.params.profile === 'object')));
+      ((typeof bid.params.keyvalues === 'undefined') || (typeof bid.params.keyvalues === 'object')));
   },
 
   /**
