@@ -99,6 +99,7 @@ export const spec = {
         data: {
           v: getGlobal().version,
           pageUrl: referer,
+          arne: "blaaaa",
           ...bidRequest
           // bidId: bidRequest.bidId,
           // auctionId: bidRequest.auctionId,
