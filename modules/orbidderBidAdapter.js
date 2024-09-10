@@ -150,6 +150,9 @@ export const spec = {
  * @returns {float||undefined}
  */
 function getBidFloor(bid) {
+  console.log("getBidFloor")
+  console.log(bid)
+
   if (!isFn(bid.getFloor)) {
     return bid.params.bidfloor;
   }
@@ -159,6 +162,11 @@ function getBidFloor(bid) {
     mediaType: '*',
     size: '*'
   });
+
+
+  console.log("floor")
+  console.log(floor)
+
   if (isPlainObject(floor) && !isNaN(floor.floor) && floor.currency === 'EUR') {
     return floor.floor;
   }
